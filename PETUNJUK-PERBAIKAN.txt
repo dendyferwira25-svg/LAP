@@ -1,0 +1,33 @@
+PERBAIKAN KONFIGURASI AGENDA KERJA TIM LAP
+
+A. FILE YANG DIGANTI
+1. Ganti file src/supabase.js pada repository GitHub dengan src/supabase.js dari paket ini.
+2. Ganti .env.example di root repository dengan .env.example dari paket ini.
+3. Jangan upload file .env yang berisi konfigurasi pribadi ke GitHub.
+
+B. ENVIRONMENT VARIABLES DI VERCEL
+Buka Project > Settings > Environment Variables. Tambahkan:
+VITE_SUPABASE_URL = https://cuibdugwyuqjsmlroqfh.supabase.co
+VITE_SUPABASE_PUBLISHABLE_KEY = [tempel Publishable key dari Supabase]
+Pilih Production, Preview, Development jika tersedia. Simpan.
+Setelah itu buka Deployments dan lakukan Redeploy deployment terbaru.
+
+C. DATABASE
+File schema.sql berada di ROOT repository LAP, bukan di supabase/schema.sql.
+Buka https://github.com/dendyferwira25-svg/LAP/blob/main/schema.sql
+Salin isi file dan jalankan di Supabase > SQL Editor > New query > Run.
+Jika file schema.sql belum pernah dijalankan, jalankan sekali. Jika terjadi error, hentikan dan periksa error sebelum mencoba ulang.
+
+D. BUAT AKUN PENGGUNA
+Di Supabase > Authentication > Users, buat akun email/password untuk setiap anggota.
+Salin User ID masing-masing. Di Table Editor > public.profiles, tambahkan baris dengan:
+- id: User ID dari Authentication
+- full_name: nama lengkap
+- department: salah satu dari Kepala Unit, Desain Grafis, Admin, Operator Mesin, Finishing, Welder
+- role: head untuk kepala unit; staff untuk staf
+
+E. PENTING
+- Jangan gunakan service_role key atau secret key pada website.
+- Kunci publishable/anon memang dirancang untuk digunakan di browser, tetapi keamanan data bergantung pada Row Level Security.
+- Setelah redeploy, buka https://lap-vert.vercel.app/ dan uji login, tambah agenda, dan ubah status.
+- Saya tidak dapat menyimpan perubahan langsung ke GitHub/Vercel melalui koneksi yang tersedia; paket ini berisi file pengganti dan langkah konfigurasi.
